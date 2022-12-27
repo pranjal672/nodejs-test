@@ -1,0 +1,7 @@
+27/12/22	15:54:09	5ac11fa0-40eb-432c-9c43-6937fcd85f1f	/: GET
+27/12/22	15:54:47	ad66f213-1085-4c83-a1ba-1812371d2eec	/subdir/: GET
+27/12/22	15:54:55	e7c6d5ba-2301-491c-b0df-6be3bec82e02	/new-page.html: GET
+27/12/22	15:54:55	84d37aee-77f0-441a-b7b2-578a30f1aead	/app.js: GET
+27/12/22	15:56:20	47f7c71b-7074-415f-af2c-b30e45f7a644	/new-page.html: GET
+27/12/22	15:56:32	f1e1f766-73c8-47a6-b20d-777e5b674908	/new-page.html: GET
+27/12/22	15:56:32	daa82475-5b84-4722-bbd5-d86ec78400ea	/app.js: GET
