@@ -1,113 +1,65 @@
-const http = require("http");
+const express = require("express");
+const app = express();
 const path = require("path");
-const fs = require("fs");
-const fsPromises = require("fs").promises;
-
-const logEvents = require("./logEvents");
-
-const EventEmitter = require("events");
-
-class Emmitter extends EventEmitter {}
-const myEmitter = new Emmitter();
-myEmitter.on("log", (msg, fileName) => logEvents(msg, fileName));
+const cors = require("cors");
+const corsOptions = require("./config/corsOptions");
+const verifyJWT = require("./middleware/verifyJWT");
+const cookieParser = require("cookie-parser");
+const credentials = require("./middleware/credentials");
 
 const PORT = process.env.PORT || 3500;
 
-const serveFile = async (contentType, filePath, response) => {
-  try {
-    const rawData = await fsPromises.readFile(
-      filePath,
-      !contentType.includes("image") ? "utf8" : ""
-    );
-    const data =
-      contentType === "application/json" ? JSON.parse(rawData) : rawData;
-    response.writeHead(filePath.includes("404.html") ? 404 : 200, {
-      "Content-Type": contentType,
-    });
-    response.end(
-      contentType === "application/json" ? JSON.stringify(data) : data
-    );
-  } catch (err) {
-    console.log(err);
-    myEmitter.emit("log", `${err.name}: ${err.message}`, "errLog.txt");
-    response.statusCode = 500;
-    response.end();
-  }
-};
+const { logger } = require("./middleware/logEvents.js");
+const errorHandler = require("./middleware/errorHandler.js");
 
-const server = http.createServer((req, res) => {
-  console.log(req.url, req.method);
-  myEmitter.emit("log", `${req.url}: ${req.method}`, "reqLog.txt");
+//custom middleware logger
+app.use(logger);
 
-  const extension = path.extname(req.url);
+// handle options credentials check - before cors
+// and fetch cookies credentials requirement
+app.use(credentials);
 
-  let contentType;
+// Cross origin resource sharing
+app.use(cors(corsOptions));
 
-  switch (extension) {
-    case ".css":
-      contentType = "text/css";
-      break;
-    case ".js":
-      contentType = "text/javascript";
-      break;
-    case ".json":
-      contentType = "application/json";
-      break;
-    case ".jpeg":
-      contentType = "image/jpeg";
-      break;
-    case ".png":
-      contentType = "mage/png";
-      break;
-    case ".txt":
-      contentType = "text/plain";
-      break;
-    default:
-      contentType = "text/html";
-  }
+// built-in middleware to handle urlencoded form data
+app.use(express.urlencoded({ extended: false }));
 
-  let filePath =
-    contentType === "text/html" && req.url === "/"
-      ? path.join(__dirname, "views", "index.html")
-      : contentType === "text/html" && req.url.slice(-1) === "/"
-      ? path.join(__dirname, "views", req.url, "index.html")
-      : contentType === "text/html"
-      ? path.join(__dirname, "views", req.url)
-      : path.join(__dirname, req.url);
+// built-in middleware for json data
+app.use(express.json());
 
-  if (!extension && req.url.slice(-1) !== "/") filePath += ".html";
+// middleware for cookies
+app.use(cookieParser());
 
-  const fileExists = fs.existsSync(filePath);
+// // serve static file
+// app.use("/", express.static(path.join(__dirname, "/public")));
+// app.use("/subdir", express.static(path.join(__dirname, "/public")));
 
-  if (fileExists) {
-    console.log(contentType);
-    // serve file
-    serveFile(contentType, filePath, res);
+// routes
+app.use("/", require("./routes/root"));
+app.use("/register", require("./routes/register"));
+app.use("/auth", require("./routes/auth"));
+app.use("/refresh", require("./routes/refresh"));
+app.use("/logOut", require("./routes/logOut"));
+// app.use("/subdir", require("./routes/subdir"));
+app.use(verifyJWT);
+app.use("/employees", require("./routes/api/employees"));
+
+//sending 404 error page
+app.all("*", (req, res) => {
+  res.status(404);
+  if (req.accepts("html")) {
+    res.sendFile(path.join(__dirname, "views", "404.html"));
+  } else if (req.accepts(json)) {
+    res.json({ error: "404 not found" });
   } else {
-    switch (path.parse(filePath).base) {
-      // 301 redirect
-      case "old-page.html":
-        res.writeHead(301, { Location: "/new-page.html" });
-        res.end();
-        break;
-      default:
-        // 404
-        serveFile("text/html", path.join(__dirname, "views", "404.html"), res);
-    }
+    res.type("txt").send("404 not found");
   }
-
-  // let myPath;
-
-  // if (req.url === "/" || req.url === "/index.html") {
-  //   res.statusCode = 200;
-  //   res.setHeader("Content-Type", "text/html");
-  //   myPath = path.join(__dirname, "views", "index.html");
-  //   fs.readFile(myPath, "utf-8", (err, data) => {
-  //     res.end(data);
-  //   });
-  // }
 });
 
-server.listen(PORT, () => {
+// custom error handler
+app.use(errorHandler);
+
+app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
