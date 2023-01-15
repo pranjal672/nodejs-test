@@ -1,0 +1,14 @@
+[
+  {
+    "username": "Vasu",
+    "roles": { "User": 2001 },
+    "password": "$2b$10$f4/PZVKttcKTcwROrFkkfuCu4LJm/kM3kV5sGBG/ji/.JU1jCn3/m",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlZhc3UiLCJpYXQiOjE2NzM1MzQxNTEsImV4cCI6MTY3MzYyMDU1MX0.ioA2iVdtbU5gfASZ5djVPaksOYURZksgjjZLJzsdAjY"
+  },
+  {
+    "username": "Ribhu",
+    "roles": { "Admin": 5150, "Editor": 1984, "User": 2001 },
+    "password": "$2b$10$QhawRrfiURLhVbiS/kLBSe.ecwBe/NRceeCSuVQML6LMLvyIfKAqe",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJpYmh1IiwiaWF0IjoxNjczNTM0MTk0LCJleHAiOjE2NzM2MjA1OTR9.QKT3ndWRr_1EuBxN3TQENc5mVi7E4G-wr1PsjRlXkMk"
+  }
+]

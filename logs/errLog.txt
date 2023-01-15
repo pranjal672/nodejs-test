@@ -1,1 +1,14 @@
 27/12/22	15:56:20	f09faeaa-3333-48be-8044-d8cd23bcd201	TypeError: fsPromises.readFil is not a function
+30/12/22	19:44:26	d85074d9-4651-4413-8fb5-8050a6d139d2	Error:Not allowed by CORS
+01/01/23	20:54:04	2b74a663-4b82-4c47-80b3-7ca2ae419590	Error:ENOENT: no such file or directory, stat '/home/pranjal/projects/nodejs-test/routes/views/index.html'
+01/01/23	20:59:12	2ff1cd7e-53dd-4cb6-941b-cac460255269	Error:ENOENT: no such file or directory, stat '/home/pranjal/projects/nodejs-test/routes/views/index.html'
+01/01/23	20:59:19	145e54a8-ae56-49db-bc3b-ff8e1313a2d6	Error:ENOENT: no such file or directory, stat '/home/pranjal/projects/nodejs-test/routes/views/index.html'
+02/01/23	21:54:48	036ee4d5-50e0-4eec-bd80-7a33daf2e9ed	ReferenceError:setEmployees is not defined
+02/01/23	21:55:21	9e84c294-7023-4ed5-b9a4-51e3b43f6e16	TypeError:this.employees is not a function
+04/01/23	20:31:05	3d400aa6-469d-4c14-b7a1-27cf33cfc26d	ReferenceError:setEmployees is not defined
+04/01/23	20:32:47	57869fb4-f968-489d-af9f-0b5a9d98416a	ReferenceError:setEmployees is not defined
+04/01/23	20:47:11	83129326-a4dd-4dbc-857b-4bdfd90b262c	TypeError:Cannot read properties of undefined (reading 'id')
+04/01/23	20:48:58	ed770d3b-9c11-4147-b274-b4045d4e5861	TypeError:Cannot read properties of undefined (reading 'id')
+04/01/23	21:19:31	6223b389-e51b-4548-808c-3fe6034b7850	TypeError:data.employees.find is not a function
+04/01/23	21:20:16	6a2b6f91-0bc9-400a-bbbd-5d212c82b224	TypeError:data.employees.find is not a function
+04/01/23	21:21:20	73c16338-7bfd-4053-9d9d-0abfd21f90ef	TypeError:data.employees.find is not a function
