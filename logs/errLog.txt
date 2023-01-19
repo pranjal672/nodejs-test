@@ -12,3 +12,13 @@
 04/01/23	21:19:31	6223b389-e51b-4548-808c-3fe6034b7850	TypeError:data.employees.find is not a function
 04/01/23	21:20:16	6a2b6f91-0bc9-400a-bbbd-5d212c82b224	TypeError:data.employees.find is not a function
 04/01/23	21:21:20	73c16338-7bfd-4053-9d9d-0abfd21f90ef	TypeError:data.employees.find is not a function
+19/01/23	18:43:28	fc306f2d-718c-4b89-8daa-a519e4d2186c	TypeError:Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+19/01/23	18:43:57	cd6d20a9-ad1a-40b4-8c9b-d337d2926fca	TypeError:Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
