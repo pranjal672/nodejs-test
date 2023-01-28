@@ -11,6 +11,7 @@ const path = require("path"); */
 const bcrypt = require("bcrypt");
 
 const handleNewUser = async (req, res) => {
+  console.log(req);
   const { user, pwd } = req.body;
   if (!user || !pwd)
     return res
