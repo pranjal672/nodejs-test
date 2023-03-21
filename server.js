@@ -50,6 +50,7 @@ app.use("/logOut", require("./routes/logOut"));
 // app.use("/subdir", require("./routes/subdir"));
 app.use(verifyJWT);
 app.use("/employees", require("./routes/api/employees"));
+app.use("/users", require("./routes/api/users"));
 
 //sending 404 error page
 app.all("*", (req, res) => {
